@@ -21,11 +21,13 @@ This started as my term project for **CSE 108**. It sat on my drive half-finishe
 
 ## Running it
 
-You need **JDK 17 or newer**. You don't need Maven installed, because the Maven wrapper (`mvnw`) is included.
+You need **JDK 17 or newer** (for example [Temurin](https://adoptium.net/)). You don't need Maven installed, because the Maven wrapper (`mvnw`) is included. The first run downloads Maven and the libraries, so it needs internet and takes a minute or two.
 
-**1. Get a free API key** from [weatherapi.com](https://www.weatherapi.com/signup.aspx). The free plan is plenty.
+**1. Get the code.** Clone the repo, or click **Code → Download ZIP** on GitHub and extract it. Open a terminal in the folder that has `pom.xml` in it.
 
-**2. Add the key.** Make a copy of the example config:
+**2. Get a free API key** from [weatherapi.com](https://www.weatherapi.com/signup.aspx). The free plan is plenty.
+
+**3. Add the key.** Make a copy of the example config:
 
 ```bash
 cp config.example.properties config.properties      # Windows: copy config.example.properties config.properties
@@ -37,17 +39,37 @@ then paste your key into `config.properties`:
 weatherapi.key=your-key-here
 ```
 
-`config.properties` is git-ignored, so the key never ends up on GitHub. If you prefer, you can set a `WEATHER_API_KEY` environment variable instead.
+`config.properties` is git-ignored, so the key never ends up on GitHub. If you prefer, you can set a `WEATHER_API_KEY` environment variable instead. The app looks for `config.properties` in the folder it's started from, so keep it next to `pom.xml`.
 
-**3. Run it:**
+**4. Run it.** On macOS or Linux:
 
 ```bash
-./mvnw javafx:run          # Windows: mvnw.cmd javafx:run
+./mvnw javafx:run
 ```
 
-From IntelliJ you can also open the folder as a Maven project and run `com.weatherfx.Launcher`.
+On Windows (PowerShell, which is also the default terminal in VS Code):
+
+```powershell
+.\mvnw.cmd javafx:run
+```
+
+If macOS or Linux says `permission denied`, run `chmod +x mvnw` once and try again.
 
 > On JDK 24 or newer you'll see a few `WARNING:` lines about `sun.misc.Unsafe` and native access at startup. They come from JavaFX 21 itself and don't affect anything.
+
+### From VS Code
+
+1. Install the **Extension Pack for Java** (by Microsoft).
+2. **File → Open Folder** and pick the project folder, then wait for the Java import to finish (watch the status bar).
+3. Run the command from step 4 in the built-in terminal, or open `Launcher.java` and click **Run** above `main`.
+
+### From IntelliJ IDEA
+
+1. **File → Open**, pick the project folder and open it as a project. IntelliJ sets it up as a Maven project on its own.
+2. In **File → Project Structure → Project**, set the SDK to JDK 17 or newer.
+3. Open `Launcher.java` and click the green run arrow next to `main`. Running **javafx:run** from the Maven tool window (Plugins → javafx) works too.
+
+In either IDE, run `Launcher` rather than `WeatherApp`. Starting `WeatherApp` directly fails with "JavaFX runtime components are missing", and `Launcher` is there to get around that.
 
 ### Comments server
 
@@ -57,6 +79,15 @@ The comments screen talks to a small socket server. Start it in a second termina
 ./mvnw compile exec:java                       # listens on port 5555
 ./mvnw compile exec:java -Dexec.args="6000"    # or choose another port
 ```
+
+On Windows (PowerShell):
+
+```powershell
+.\mvnw.cmd compile exec:java
+.\mvnw.cmd compile exec:java "-Dexec.args=6000"
+```
+
+From VS Code or IntelliJ you can also just run the `main` method in `CommentsServer.java`.
 
 Comments get saved to `comments.jsonl` in the folder you started it from. To share one board with friends on the same Wi-Fi, run the server on one machine and set `comments.host` in everyone's `config.properties` to that machine's local IP.
 
@@ -102,7 +133,7 @@ A few things worth knowing if you're reading the code:
 ## Tests
 
 ```bash
-./mvnw test
+./mvnw test          # Windows: .\mvnw.cmd test
 ```
 
 The tests cover:
