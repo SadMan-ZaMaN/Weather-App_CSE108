@@ -14,13 +14,11 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Turns WeatherAPI's JSON into the small records the UI uses. */
 public final class WeatherParser {
 
     private WeatherParser() {
     }
 
-    /** For forecast.json responses (they include "current" as well as the daily forecast). */
     public static WeatherReport parseReport(JsonObject json) {
         return new WeatherReport(
                 parseLocation(json.getAsJsonObject("location")),
@@ -100,7 +98,7 @@ public final class WeatherParser {
                 hour.get("wind_kph").getAsDouble());
     }
 
-    /** The API hands out protocol-relative URLs like "//cdn.weatherapi.com/...". */
+    // icon urls come without https, like "//cdn.weatherapi.com/..."
     private static String iconUrl(JsonObject condition) {
         String icon = text(condition, "icon");
         return icon.startsWith("//") ? "https:" + icon : icon;

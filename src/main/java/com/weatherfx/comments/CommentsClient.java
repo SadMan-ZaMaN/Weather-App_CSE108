@@ -10,7 +10,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Talks to {@link CommentsServer}. Calls block, so keep them off the FX thread. */
 public class CommentsClient {
 
     private static final int TIMEOUT_MS = 4000;

@@ -33,7 +33,6 @@ public enum Units {
         return Math.round(temperature(celsius)) + temperatureSymbol;
     }
 
-    /** Just the number and a degree sign, for tight spots like "31° / 26°". */
     public String formatDegrees(double celsius) {
         return Math.round(temperature(celsius)) + "°";
     }

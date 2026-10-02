@@ -2,10 +2,6 @@ package com.weatherfx.model;
 
 import java.util.Locale;
 
-/**
- * The handful of "looks" the app knows how to draw. WeatherAPI has ~50 condition texts,
- * so this squashes them down into something the background and the mood tips can work with.
- */
 public enum Sky {
     CLEAR,
     CLOUDY,
@@ -43,7 +39,7 @@ public enum Sky {
         return CLEAR;
     }
 
-    /** File name (without .mp4) of the matching background clip from the original version of the app. */
+    // clip name in resources/videos, without .mp4
     public String videoName(boolean day) {
         return switch (this) {
             case CLEAR -> day ? "Sunny" : "Clear";

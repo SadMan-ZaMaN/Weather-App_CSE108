@@ -23,14 +23,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-/**
- * Small wrapper around https://www.weatherapi.com. All calls block, so run them off the FX thread.
- */
 public class WeatherApiClient {
 
     private static final String BASE_URL = "https://api.weatherapi.com/v1/";
 
-    /** Roughly what a free key is allowed to ask for. Anything outside this the API refuses anyway. */
+    // free plan limits
     public static final int HISTORY_DAYS = 7;
     public static final int FORECAST_DAYS = 14;
 
@@ -47,11 +44,7 @@ public class WeatherApiClient {
         return !apiKey.isEmpty();
     }
 
-    /**
-     * Current conditions plus a 3 day outlook.
-     *
-     * @param query a city name, "lat,lon", or "auto:ip" to let WeatherAPI guess from the IP address
-     */
+    // query can be a city name, "lat,lon" or "auto:ip"
     public WeatherReport fetchReport(String query) throws WeatherApiException {
         Map<String, String> params = new LinkedHashMap<>();
         params.put("q", query);
@@ -61,7 +54,6 @@ public class WeatherApiClient {
         return parse(get("forecast.json", params), WeatherParser::parseReport);
     }
 
-    /** Hour-by-hour data for a single day. Past days come from the history endpoint. */
     public ForecastDay fetchDay(Location location, LocalDate date) throws WeatherApiException {
         String endpoint = date.isBefore(LocalDate.now()) ? "history.json" : "forecast.json";
         Map<String, String> params = new LinkedHashMap<>();
@@ -129,7 +121,7 @@ public class WeatherApiClient {
         }
     }
 
-    /** Error codes are listed at https://www.weatherapi.com/docs/#intro-error-codes */
+    // error codes: https://www.weatherapi.com/docs/#intro-error-codes
     static String friendlyMessage(int code, String apiMessage) {
         return switch (code) {
             case 1006 -> "Couldn't find that place. Check the spelling and try again.";

@@ -299,7 +299,7 @@ public class MainController {
         }
     }
 
-    /** "2026-10-03 14:30" -> "14:30" */
+    // "2026-10-03 14:30" -> "14:30"
     private static String timePart(String apiTime) {
         int space = apiTime.indexOf(' ');
         return space < 0 ? apiTime : apiTime.substring(space + 1);

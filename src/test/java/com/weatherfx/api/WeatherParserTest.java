@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/** The JSON files are real WeatherAPI responses, trimmed down to a few hours per day. */
+// the json files are real API responses, cut down to a few hours per day
 class WeatherParserTest {
 
     @Test

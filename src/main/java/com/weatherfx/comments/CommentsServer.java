@@ -17,14 +17,9 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * Tiny socket server behind the "Comments" screen. Every request is its own short connection:
- * <pre>
- *   GET  -> int count, then count comments
- *   POST author text location -> "OK" or "ERROR reason"
- * </pre>
- * Run it with {@code mvn compile exec:java} (optionally {@code -Dexec.args="6000"} for another port).
- */
+// one short connection per request:
+//   GET                       -> count, then the comments
+//   POST author text location -> "OK" or "ERROR reason"
 public class CommentsServer implements Closeable {
 
     private static final DateTimeFormatter LOG_TIME = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -42,7 +37,6 @@ public class CommentsServer implements Closeable {
         return serverSocket.getLocalPort();
     }
 
-    /** Accepts clients until {@link #close()} is called. */
     public void serve() {
         while (!serverSocket.isClosed()) {
             try {

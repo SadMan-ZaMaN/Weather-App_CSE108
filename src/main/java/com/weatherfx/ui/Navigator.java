@@ -9,15 +9,11 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
-/**
- * Swaps screens inside one window. The main screen is loaded once and kept, so coming back
- * from the forecast or comments doesn't wipe out the weather you were looking at.
- */
 public class Navigator {
 
     private final StackPane container;
     private AppContext context;
-    private Parent mainView;
+    private Parent mainView; // kept so going back doesn't lose the last search
 
     public Navigator(StackPane container) {
         this.container = container;
@@ -34,7 +30,6 @@ public class Navigator {
         swapTo(mainView);
     }
 
-    /** Loads a screen, shows it, and returns its controller so the caller can pass data in. */
     public <T> T show(String fxml) {
         FXMLLoader loader = load(fxml);
         swapTo(loader.getRoot());

@@ -7,7 +7,6 @@ import javafx.beans.property.ObjectProperty;
 
 import java.util.prefs.Preferences;
 
-/** The shared bits every screen might need. Handed to controllers through their constructor. */
 public record AppContext(
         WeatherApiClient weatherApi,
         CommentsClient comments,

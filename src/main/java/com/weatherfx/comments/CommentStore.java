@@ -11,10 +11,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Keeps comments in a text file, one JSON object per line. JSON takes care of escaping,
- * so comments with newlines or "|" in them can't break the file like the old format could.
- */
+// one JSON object per line, so a comment with newlines or "|" in it can't break the file
 public class CommentStore {
 
     private final Path file;

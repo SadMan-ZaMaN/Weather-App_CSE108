@@ -6,7 +6,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-/** Suggests something to do based on the weather outside and how you're feeling. */
 public final class MoodRecommendationEngine {
 
     private static final Map<Sky, Map<Mood, List<String>>> RECOMMENDATIONS = new EnumMap<>(Sky.class);

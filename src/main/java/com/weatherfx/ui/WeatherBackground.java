@@ -23,14 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * The animated sky behind every screen.
- * <p>
- * The first version of the app looped video clips here. Big video files don't play nicely with git,
- * so now everything is drawn on a canvas instead: a gradient sky plus clouds, rain, snow, fog,
- * stars or lightning depending on the weather. If a matching clip (e.g. {@code Heavy_Rain.mp4}) is
- * put in {@code resources/com/weatherfx/videos/}, that gets played instead.
- */
+// the sky behind every screen. drawn on a canvas, or plays an mp4 if there's one in resources/videos
 public class WeatherBackground extends Pane {
 
     private static final String VIDEO_FOLDER = "/com/weatherfx/videos/";
@@ -108,8 +101,6 @@ public class WeatherBackground extends Pane {
         stopVideo();
     }
 
-    // ---------------------------------------------------------------- layout
-
     @Override
     protected void layoutChildren() {
         double w = getWidth();
@@ -142,8 +133,6 @@ public class WeatherBackground extends Pane {
     protected double computePrefHeight(double width) {
         return 0;
     }
-
-    // ---------------------------------------------------------------- video
 
     private boolean playVideo(String name) {
         URL url = WeatherBackground.class.getResource(VIDEO_FOLDER + name + ".mp4");
@@ -199,8 +188,6 @@ public class WeatherBackground extends Pane {
         lastFrame = 0;
         timer.start();
     }
-
-    // ---------------------------------------------------------------- animation
 
     private void rebuild(double w, double h) {
         clouds.clear();
@@ -376,8 +363,6 @@ public class WeatherBackground extends Pane {
         }
     }
 
-    // ---------------------------------------------------------------- drawing
-
     private void draw() {
         GraphicsContext g = canvas.getGraphicsContext2D();
         double w = canvas.getWidth();
@@ -490,7 +475,7 @@ public class WeatherBackground extends Pane {
         return from.blend(to, fade);
     }
 
-    /** A soft cloud made of a few overlapping blurry circles, rendered once and reused every frame. */
+    // soft cloud from a few blurry circles, drawn once and reused
     private static Image cloudSprite(Color color) {
         Canvas sprite = new Canvas(340, 180);
         GraphicsContext g = sprite.getGraphicsContext2D();

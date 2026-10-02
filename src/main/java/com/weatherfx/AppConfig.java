@@ -6,10 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Properties;
 
-/**
- * Reads settings from {@code config.properties} in the folder the app is started from.
- * The API key can also come from the WEATHER_API_KEY environment variable, which wins if both are set.
- */
 public final class AppConfig {
 
     public static final String FILE_NAME = "config.properties";

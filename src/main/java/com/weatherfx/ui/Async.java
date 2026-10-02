@@ -7,7 +7,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-/** Runs slow work (network calls) in the background and hands the result back on the FX thread. */
 final class Async {
 
     private static final ExecutorService POOL = Executors.newFixedThreadPool(3, task -> {
