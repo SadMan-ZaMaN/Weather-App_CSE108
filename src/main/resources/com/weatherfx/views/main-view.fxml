@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.weatherfx.ui.MainController" styleClass="screen">
+
+    <!-- search bar -->
+    <top>
+        <HBox styleClass="top-bar" alignment="CENTER_LEFT" spacing="10">
+            <Label text="WeatherFX" styleClass="brand"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="cityField" promptText="Search for a city..." prefWidth="280" onAction="#searchCity"/>
+            <Button fx:id="searchButton" text="Search" styleClass="primary" onAction="#searchCity"/>
+            <Button fx:id="locationButton" text="My location" onAction="#showCurrentWeather"/>
+            <HBox styleClass="segmented" alignment="CENTER">
+                <ToggleButton fx:id="celsiusToggle" text="°C"/>
+                <ToggleButton fx:id="fahrenheitToggle" text="°F"/>
+            </HBox>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20">
+            <BorderPane.margin>
+                <Insets bottom="24"/>
+            </BorderPane.margin>
+
+            <!-- where -->
+            <VBox alignment="CENTER" spacing="2">
+                <Label fx:id="cityLabel" styleClass="city-name"/>
+                <Label fx:id="countryLabel" styleClass="country-name"/>
+                <Label fx:id="localTimeLabel" styleClass="local-time"/>
+            </VBox>
+
+            <!-- right now -->
+            <HBox alignment="CENTER" spacing="16">
+                <VBox styleClass="card, stat-card">
+                    <Label text="Temperature" styleClass="stat-title"/>
+                    <ImageView fitWidth="36" fitHeight="36">
+                        <Image url="@../icons/temperature.png"/>
+                    </ImageView>
+                    <Label fx:id="tempLabel" styleClass="stat-value"/>
+                </VBox>
+                <VBox styleClass="card, stat-card">
+                    <Label text="Humidity" styleClass="stat-title"/>
+                    <ImageView fitWidth="36" fitHeight="36">
+                        <Image url="@../icons/humidity.png"/>
+                    </ImageView>
+                    <Label fx:id="humidityLabel" styleClass="stat-value"/>
+                </VBox>
+                <VBox styleClass="card, stat-card">
+                    <Label text="Wind" styleClass="stat-title"/>
+                    <ImageView fitWidth="36" fitHeight="36">
+                        <Image url="@../icons/wind.png"/>
+                    </ImageView>
+                    <Label fx:id="windLabel" styleClass="stat-value"/>
+                </VBox>
+                <VBox styleClass="card, stat-card">
+                    <Label text="Condition" styleClass="stat-title"/>
+                    <ImageView fitWidth="36" fitHeight="36">
+                        <Image url="@../icons/condition.png"/>
+                    </ImageView>
+                    <Label fx:id="conditionLabel" styleClass="stat-value, compact" wrapText="true" textAlignment="CENTER"/>
+                </VBox>
+                <VBox styleClass="card, stat-card">
+                    <Label text="Feels Like" styleClass="stat-title"/>
+                    <ImageView fitWidth="36" fitHeight="36">
+                        <Image url="@../icons/feels-like.png"/>
+                    </ImageView>
+                    <Label fx:id="feelsLikeLabel" styleClass="stat-value"/>
+                </VBox>
+            </HBox>
+
+            <!-- next few days + mood tips -->
+            <HBox alignment="TOP_CENTER" spacing="16">
+                <VBox styleClass="card" spacing="10" prefWidth="530">
+                    <Label text="Next 3 days" styleClass="card-title"/>
+                    <HBox fx:id="forecastStrip" spacing="10"/>
+                </VBox>
+                <VBox styleClass="card" spacing="8" prefWidth="370">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="Mood tips" styleClass="card-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="I'm feeling" styleClass="hint"/>
+                        <ChoiceBox fx:id="moodSelector" prefWidth="120"/>
+                    </HBox>
+                    <ListView fx:id="recommendationsList" prefHeight="150" focusTraversable="false"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox styleClass="footer" alignment="CENTER_LEFT" spacing="10">
+            <ProgressIndicator fx:id="spinner" prefWidth="22" prefHeight="22" visible="false"/>
+            <Label fx:id="statusLabel" styleClass="status" wrapText="true" maxWidth="620"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="forecastButton" text="Hourly forecast" onAction="#showForecast"/>
+            <Button text="Comments" onAction="#showComments"/>
+            <Button text="Exit" styleClass="ghost" onAction="#exitApp"/>
+        </HBox>
+    </bottom>
+</BorderPane>

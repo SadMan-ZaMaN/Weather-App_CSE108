@@ -1,0 +1,23 @@
+# build output
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# local settings (holds your API key) and comment server data
+config.properties
+comments.jsonl
+
+# IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.classpath
+.project
+.settings/
+.factorypath
+nbproject/private/
+
+# OS junk
+.DS_Store
+Thumbs.db

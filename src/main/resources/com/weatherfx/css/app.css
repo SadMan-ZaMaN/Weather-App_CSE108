@@ -1,0 +1,431 @@
+/*
+ * WeatherFX styles.
+ * Everything sits on top of the animated sky, so the idea is: white text, dark see-through cards.
+ */
+
+.root {
+    -fx-font-family: "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
+    -fx-font-size: 14px;
+
+    -accent: #4fc3f7;
+    -accent-text: #08263a;
+    -glass: rgba(10, 18, 32, 0.40);
+    -glass-border: rgba(255, 255, 255, 0.16);
+    -soft-text: rgba(255, 255, 255, 0.75);
+}
+
+/* darkens the top and bottom of the sky a little so text stays readable on bright days */
+.background-shade {
+    -fx-background-color: linear-gradient(to bottom,
+        rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0) 28%, rgba(0, 0, 0, 0) 62%, rgba(0, 0, 0, 0.38) 100%);
+}
+
+.screen {
+    -fx-padding: 20 32 20 32;
+}
+
+.screen .label {
+    -fx-text-fill: white;
+}
+
+/* ------------------------------------------------------------ layout bits */
+
+.top-bar {
+    -fx-padding: 0 0 12 0;
+}
+
+.footer {
+    -fx-padding: 14 0 0 0;
+}
+
+.screen .brand {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.screen .screen-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.screen .screen-subtitle,
+.screen .hint {
+    -fx-text-fill: -soft-text;
+    -fx-font-size: 13px;
+}
+
+.card {
+    -fx-background-color: -glass;
+    -fx-background-radius: 18;
+    -fx-border-color: -glass-border;
+    -fx-border-radius: 18;
+    -fx-padding: 16 18 16 18;
+}
+
+.screen .card-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.screen .message {
+    -fx-text-fill: -soft-text;
+    -fx-font-size: 15px;
+}
+
+.screen .pill {
+    -fx-background-color: rgba(255, 255, 255, 0.12);
+    -fx-background-radius: 999;
+    -fx-padding: 6 14 6 14;
+}
+
+/* ------------------------------------------------------------ main screen */
+
+.screen .city-name {
+    -fx-font-size: 46px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 8, 0, 0, 2);
+}
+
+.screen .country-name {
+    -fx-font-size: 18px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 4, 0, 0, 1);
+}
+
+.screen .local-time {
+    -fx-text-fill: -soft-text;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 4, 0, 0, 1);
+}
+
+.stat-card {
+    -fx-pref-width: 170;
+    -fx-min-height: 138;
+    -fx-spacing: 6;
+    -fx-alignment: center;
+}
+
+.screen .stat-title {
+    -fx-text-fill: -soft-text;
+    -fx-font-size: 13px;
+}
+
+.screen .stat-value {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+.screen .stat-value.compact {
+    -fx-font-size: 16px;
+}
+
+.day-tile {
+    -fx-background-color: rgba(255, 255, 255, 0.07);
+    -fx-background-radius: 12;
+    -fx-padding: 8 6 10 6;
+}
+
+.screen .day-name {
+    -fx-font-weight: bold;
+}
+
+.screen .day-temps {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.screen .day-detail {
+    -fx-text-fill: -soft-text;
+    -fx-font-size: 12px;
+}
+
+.screen .status {
+    -fx-text-fill: -soft-text;
+    -fx-font-size: 13px;
+}
+
+.screen .status.error,
+.screen .form-error {
+    -fx-text-fill: #ffd2cb;
+    -fx-background-color: rgba(190, 45, 35, 0.45);
+    -fx-background-radius: 8;
+    -fx-padding: 4 10 4 10;
+}
+
+/* ------------------------------------------------------------ buttons */
+
+.screen .button,
+.screen .toggle-button {
+    -fx-background-color: rgba(255, 255, 255, 0.14);
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(255, 255, 255, 0.22);
+    -fx-border-radius: 10;
+    -fx-text-fill: white;
+    -fx-padding: 8 16 8 16;
+    -fx-cursor: hand;
+}
+
+.screen .button:hover,
+.screen .toggle-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.24);
+}
+
+.screen .button:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.32);
+}
+
+.screen .button:focused {
+    -fx-border-color: -accent;
+}
+
+.screen .button.primary {
+    -fx-background-color: -accent;
+    -fx-border-color: transparent;
+    -fx-text-fill: -accent-text;
+    -fx-font-weight: bold;
+}
+
+.screen .button.primary:hover {
+    -fx-background-color: derive(-accent, 20%);
+}
+
+.screen .button.ghost {
+    -fx-background-color: transparent;
+}
+
+.screen .button.ghost:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.14);
+}
+
+.screen .button:disabled,
+.screen .toggle-button:disabled {
+    -fx-opacity: 0.45;
+}
+
+/* two or more toggle buttons glued together (°C / °F, chart metrics) */
+.segmented {
+    -fx-background-color: rgba(255, 255, 255, 0.12);
+    -fx-background-radius: 11;
+    -fx-padding: 3;
+    -fx-spacing: 2;
+}
+
+.segmented .toggle-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 8;
+    -fx-padding: 6 14 6 14;
+}
+
+.segmented .toggle-button:selected {
+    -fx-background-color: white;
+    -fx-text-fill: #10233a;
+    -fx-font-weight: bold;
+}
+
+/* ------------------------------------------------------------ inputs */
+
+.screen .text-field,
+.screen .text-area {
+    -fx-background-color: rgba(255, 255, 255, 0.93);
+    -fx-background-radius: 10;
+    -fx-border-color: transparent;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-text-fill: #10233a;
+    -fx-prompt-text-fill: #6b7a8c;
+    -fx-highlight-fill: -accent;
+    -fx-highlight-text-fill: -accent-text;
+}
+
+.screen .text-field {
+    -fx-padding: 7 12 7 12;
+}
+
+.screen .text-field:focused,
+.screen .text-area:focused {
+    -fx-border-color: -accent;
+}
+
+.screen .text-area .content,
+.screen .text-area .scroll-pane,
+.screen .text-area .scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.screen .text-area .content {
+    -fx-padding: 6 8 6 8;
+}
+
+.screen .choice-box {
+    -fx-background-color: rgba(255, 255, 255, 0.14);
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(255, 255, 255, 0.22);
+    -fx-border-radius: 10;
+    -fx-padding: 2 4 2 4;
+    -fx-cursor: hand;
+}
+
+.screen .choice-box > .open-button > .arrow {
+    -fx-background-color: white;
+}
+
+.screen .date-picker {
+    -fx-background-color: transparent;
+}
+
+.screen .date-picker > .text-field {
+    -fx-background-radius: 10 0 0 10;
+    -fx-border-radius: 10 0 0 10;
+}
+
+.screen .date-picker > .arrow-button {
+    -fx-background-color: rgba(255, 255, 255, 0.93);
+    -fx-background-radius: 0 10 10 0;
+    -fx-cursor: hand;
+}
+
+.screen .progress-indicator {
+    -fx-progress-color: white;
+}
+
+/* ------------------------------------------------------------ lists & scrolling */
+
+.screen .list-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.screen .list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-padding: 6 8 6 8;
+}
+
+.screen .list-view .list-cell:filled:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 8;
+}
+
+.screen .list-view .list-cell:filled:selected {
+    -fx-background-color: rgba(79, 195, 247, 0.30);
+    -fx-background-radius: 8;
+}
+
+.screen .list-view .placeholder .label {
+    -fx-text-fill: -soft-text;
+}
+
+.screen .scroll-pane,
+.screen .scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.screen .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.screen .scroll-bar .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.25);
+    -fx-background-radius: 6;
+}
+
+.screen .scroll-bar .increment-button,
+.screen .scroll-bar .decrement-button,
+.screen .scroll-bar .increment-arrow,
+.screen .scroll-bar .decrement-arrow {
+    -fx-padding: 0;
+}
+
+/* ------------------------------------------------------------ forecast chart */
+
+.chart-card {
+    -fx-padding: 14 20 8 8;
+}
+
+.screen .chart-plot-background,
+.screen .chart-alternative-row-fill {
+    -fx-background-color: transparent;
+    -fx-fill: transparent;
+}
+
+.screen .chart-vertical-grid-lines {
+    -fx-stroke: rgba(255, 255, 255, 0.06);
+}
+
+.screen .chart-horizontal-grid-lines {
+    -fx-stroke: rgba(255, 255, 255, 0.13);
+}
+
+.screen .chart-vertical-zero-line,
+.screen .chart-horizontal-zero-line {
+    -fx-stroke: transparent;
+}
+
+.screen .axis {
+    -fx-tick-label-fill: rgba(255, 255, 255, 0.8);
+    -fx-tick-label-font-size: 12px;
+}
+
+.screen .axis-tick-mark,
+.screen .axis-minor-tick-mark {
+    -fx-stroke: rgba(255, 255, 255, 0.25);
+}
+
+.screen .chart-series-line {
+    -fx-stroke-width: 3px;
+}
+
+.screen .chart-line-symbol {
+    -fx-background-radius: 5px;
+    -fx-padding: 4px;
+}
+
+.screen .chart-line-symbol:hover {
+    -fx-scale-x: 1.6;
+    -fx-scale-y: 1.6;
+}
+
+.metric-temperature .default-color0.chart-series-line { -fx-stroke: #ff8a65; }
+.metric-temperature .default-color0.chart-line-symbol { -fx-background-color: #ff8a65, #1b2638; }
+.metric-humidity .default-color0.chart-series-line { -fx-stroke: #4fc3f7; }
+.metric-humidity .default-color0.chart-line-symbol { -fx-background-color: #4fc3f7, #1b2638; }
+.metric-rain .default-color0.chart-series-line { -fx-stroke: #ba68c8; }
+.metric-rain .default-color0.chart-line-symbol { -fx-background-color: #ba68c8, #1b2638; }
+.metric-wind .default-color0.chart-series-line { -fx-stroke: #66bb6a; }
+.metric-wind .default-color0.chart-line-symbol { -fx-background-color: #66bb6a, #1b2638; }
+
+.tooltip {
+    -fx-background-color: rgba(15, 23, 38, 0.94);
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 6 10 6 10;
+}
+
+/* ------------------------------------------------------------ comments */
+
+.comment-card {
+    -fx-background-color: rgba(255, 255, 255, 0.07);
+    -fx-background-radius: 12;
+    -fx-padding: 12 14 12 14;
+}
+
+.screen .comment-author {
+    -fx-text-fill: #4fc3f7;
+    -fx-font-weight: bold;
+}
+
+.screen .comment-time {
+    -fx-text-fill: -soft-text;
+    -fx-font-size: 12px;
+}
+
+.screen .comment-location {
+    -fx-text-fill: #a5d6a7;
+    -fx-font-style: italic;
+    -fx-font-size: 12px;
+}
+
+.screen .comment-text {
+    -fx-font-size: 14px;
+}

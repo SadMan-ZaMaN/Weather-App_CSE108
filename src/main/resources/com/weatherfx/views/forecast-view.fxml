@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.weatherfx.ui.ForecastController" styleClass="screen">
+
+    <top>
+        <HBox styleClass="top-bar" alignment="CENTER_LEFT" spacing="14">
+            <Button text="← Back" styleClass="ghost" onAction="#goBack"/>
+            <VBox>
+                <Label text="Hourly forecast" styleClass="screen-title"/>
+                <Label fx:id="placeLabel" styleClass="screen-subtitle"/>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Day" styleClass="hint"/>
+            <DatePicker fx:id="datePicker" prefWidth="170" editable="false"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="14" alignment="TOP_CENTER">
+            <BorderPane.margin>
+                <Insets top="8"/>
+            </BorderPane.margin>
+
+            <HBox styleClass="segmented" alignment="CENTER" maxWidth="-Infinity">
+                <ToggleButton fx:id="temperatureToggle" text="Temperature"/>
+                <ToggleButton fx:id="humidityToggle" text="Humidity"/>
+                <ToggleButton fx:id="rainToggle" text="Rain"/>
+                <ToggleButton fx:id="windToggle" text="Wind"/>
+            </HBox>
+
+            <StackPane styleClass="card, chart-card" VBox.vgrow="ALWAYS">
+                <LineChart fx:id="chart" animated="false" legendVisible="false" createSymbols="true">
+                    <xAxis>
+                        <CategoryAxis label="Time of day" animated="false"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis fx:id="yAxis" forceZeroInRange="false" animated="false"/>
+                    </yAxis>
+                </LineChart>
+                <ProgressIndicator fx:id="spinner" maxWidth="48" maxHeight="48" visible="false"/>
+                <Label fx:id="messageLabel" styleClass="message" wrapText="true" maxWidth="520"
+                       textAlignment="CENTER" visible="false" mouseTransparent="true"/>
+            </StackPane>
+
+            <HBox alignment="CENTER" spacing="12">
+                <Label fx:id="sunriseLabel" styleClass="pill"/>
+                <Label fx:id="sunsetLabel" styleClass="pill"/>
+                <Label fx:id="summaryLabel" styleClass="pill"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
