@@ -103,6 +103,8 @@ The first version played looping video clips behind the UI. Video files are big 
 
 The video support is still there. Drop `.mp4` files into `src/main/resources/com/weatherfx/videos/` (`Sunny.mp4`, `Heavy_Rain.mp4` and so on; the full list is in [that folder's README](src/main/resources/com/weatherfx/videos/README.md)) and the app plays those instead.
 
+For the full story (how each effect is drawn, how to change it, making your own clips and adding a new kind of weather), see [additional/backgrounds.md](additional/backgrounds.md).
+
 ## How it's put together
 
 ```
