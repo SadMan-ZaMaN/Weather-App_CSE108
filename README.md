@@ -6,6 +6,13 @@ A desktop weather app I built with Java and JavaFX. Search for a city and the wh
 
 This started as my term project for **CSE 108**. It sat on my drive half-finished for a while, so I came back to it, finished the parts I'd left hanging, cleaned up the code and put it here. In collaboration with Sk. Arib Rajin Shahan
 
+## Team Cells Interlinked
+
+| Name | Student ID |
+|---|---|
+| Sk. Arib Rajin Shahan | 2305068 |
+| Sadman Zaman | 2305075 |
+
 ## What it does
 
 - **Current weather** for any city: temperature, humidity, wind, condition and "feels like"
