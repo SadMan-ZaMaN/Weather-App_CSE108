@@ -4,7 +4,7 @@ A desktop weather app I built with Java and JavaFX. Search for a city and the wh
 
 ![WeatherFX main screen](docs/screenshots/main.png)
 
-This started as my term project for **CSE 108**. It sat on my drive half-finished for a while, so I came back to it, finished the parts I'd left hanging, cleaned up the code and put it here.
+This started as my term project for **CSE 108**. It sat on my drive half-finished for a while, so I came back to it, finished the parts I'd left hanging, cleaned up the code and put it here. In collaboration with Sk. Arib Rajin Shahan
 
 ## What it does
 
